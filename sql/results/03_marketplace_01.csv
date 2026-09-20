@@ -1,0 +1,21 @@
+city,orders,revenue,row_num_rank,rank,dense_rank
+Tirupati,243,42503460.0,1,1,1
+"Electronic City,Bangalore",1039,28599623.0,2,2,2
+"Baner,Pune",814,26784833.0,3,3,3
+Raipur,482,22756624.0,4,4,4
+"Malviya Nagar,Delhi",901,16508442.0,5,5,5
+Sultanpur,265,15056504.0,6,6,6
+"Vastrapur,Ahmedabad",596,13091765.0,7,7,7
+"Indirapuram,Delhi",1279,13027458.0,8,8,8
+"Navrangpura,Ahmedabad",433,12396403.0,9,9,9
+"Rohini,Delhi",1136,12189017.0,10,10,10
+Bikaner,1666,11355334.0,11,11,11
+Tirupur,237,10930719.0,12,12,12
+"Bopal,Ahmedabad",398,10830446.0,13,13,13
+"Ghatlodia,Ahmedabad",301,10564418.0,14,14,14
+"Hinjewadi,Pune",492,10505601.0,15,15,15
+Sirsa,132,10306212.0,16,16,16
+Sonipat,117,10055161.0,17,17,17
+"BTM,Bangalore",1161,8986541.0,18,18,18
+"GOTA,Ahmedabad",243,8933109.0,19,19,19
+"Viman Nagar,Pune",1001,8801875.0,20,20,20

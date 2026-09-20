@@ -1,0 +1,51 @@
+rnk,r_id,name,city,revenue,cumulative_pct_of_revenue
+1,377150,Janta Snacks,"Navrangpura,Ahmedabad",1510944.0,0.16
+2,80384,Domino's Pizza,Tirupati,1492435.0,0.31
+3,474086,Happy Brew Cafe,Tirupati,1477458.0,0.46
+4,387586,Kouzina Kafe - The Food Court,"Electronic City,Bangalore",1477394.0,0.62
+5,123836,Jaysika DDN Fast Food,Rishikesh,1338264.0,0.76
+6,566896,Cafe Yummy,Raipur,1316921.0,0.89
+7,213931,Huber & Holly,"Navrangpura,Ahmedabad",1283875.0,1.03
+8,435278,Krishna Food,"Ghatlodia,Ahmedabad",1283875.0,1.16
+9,455334,ZAATAR SPICE,"Electronic City,Bangalore",1235347.0,1.29
+10,378311,Blue Tokai Coffee Roasters,"Connaught Place,Delhi",1228148.0,1.42
+11,403433,NBK Food Home,"Chattarpur,Delhi",1224088.0,1.54
+12,194563,McCafe by McDonald's,Tirupati,1160782.0,1.66
+13,516065,SRI LAKSHMI  BAR AND RESTAURANT,Raichur,1089685.0,1.78
+14,241740,Biryani House,Rewari,1072000.0,1.89
+15,567906,Meals & More by The Asian Secret,Sirsa,1007972.0,1.99
+16,529020,Wack Waffles & Brownies,"Chandkheda,Ahmedabad",996102.0,2.09
+17,323185,REDDY VISHNU FAST FOODS,Tirupati,994954.0,2.2
+18,357663,Mirch Masala,"Ghatlodia,Ahmedabad",994241.0,2.3
+19,553387,Sujay Krishna Cool Cafe,Tirupati,984977.0,2.4
+20,417294,Jayhind Sweets,"Ghatlodia,Ahmedabad",970130.0,2.5
+21,524903,WoW China,"Navrangpura,Ahmedabad",970130.0,2.6
+22,86674,Manju Mamta Restaurant,Raipur,878935.0,2.7
+23,202522,Man Pasand Family Restaurant,Siwan,873528.0,2.79
+24,164460,Moti Mahal Delux -Tandoori Trail,Sitapur,860306.0,2.88
+25,201784,North indian fast food,Sirsi,860306.0,2.96
+26,173185,NGO Restaurant,Tirunelveli,850509.0,3.05
+27,556254,Andhra MILITARY CAFE,"Baner,Pune",832921.0,3.14
+28,80371,Pizza Toppers,Tirupati,829130.0,3.22
+29,424186,AFC Tirupati,Tirupati,829130.0,3.31
+30,513792,Araku vari millet idli,Tirupati,820810.0,3.4
+31,494066,PUNJAB TIME,"Hinjewadi,Pune",809574.0,3.48
+32,548565,Red Chilly Chinese Food,"Ghatlodia,Ahmedabad",807301.0,3.56
+33,428115,CLUB 10 CHICKEN,Tirupur,778588.0,3.64
+34,531396,The Rice Culture,"Baner,Pune",762949.0,3.72
+35,247046,DODO'S SMOKEHOUSE,"Electronic City,Bangalore",760255.0,3.8
+36,311001,Biryani Villa,"Chandkheda,Ahmedabad",725699.0,3.88
+37,129667,Royal pizza - Kakori Road,Sonipat,725037.0,3.95
+38,551078,Aadhi Potoba,Ratnagiri,714667.0,4.03
+39,151999,The Spicy Saga,Sri-ganganagar,682556.0,4.1
+40,165077,Chaska Restaurant,Sitapur,678398.0,4.17
+41,416740,Burger It Up,Tirupati,671963.0,4.24
+42,470919,ZAITOUN ZAIKA,"Electronic City,Bangalore",666111.0,4.31
+43,107646,Honest,"Navrangpura,Ahmedabad",659380.0,4.38
+44,338807,The Wok Tales,"Ghatlodia,Ahmedabad",659380.0,4.44
+45,530585,Uman Haidrabadi Biryani,"Baner,Pune",658486.0,4.51
+46,198404,Hotel Sri Lakshmi Bhavan,Tirupati,656648.0,4.58
+47,389454,ROYAL PARADISE,Tirupati,656648.0,4.65
+48,411574,COCO FIT,Tirupati,656648.0,4.72
+49,485258,The Dessert Heaven - Pure Veg,Tirupati,656648.0,4.78
+50,500803,3k sukhibhava,Tirupati,656648.0,4.85

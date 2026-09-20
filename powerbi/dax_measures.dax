@@ -1,0 +1,138 @@
+// ============================================================================
+// Swiggy Marketplace Intelligence — DAX Measures
+// ============================================================================
+// Data model (star schema — see dashboard_build_guide.md for the relationship
+// diagram):
+//   fact_orders[r_id]     -> dim_restaurants[r_id]      (many-to-one)
+//   fact_orders[user_id]  -> customer_rfm[user_id]      (many-to-one)
+//   fact_orders[order_date] -> dim_date[date]           (many-to-one)
+// customer_rfm carries the RFM segment per customer, so slicing/filtering
+// by dim_restaurants[city] or customer_rfm[segment] flows into every
+// measure below automatically — that's what makes "select a city and
+// Revenue/Orders/AOV/Customers/Repeat Rate all update together" work.
+//
+// IMPORTANT — revenue definition: fact_orders[revenue] is already NULL for
+// zero-amount orders (see docs/01_data_audit.md) so SUM() naturally excludes
+// them from monetary totals while COUNTROWS() still counts them as orders.
+// Do not use fact_orders[amount] for money measures — use [revenue].
+// ============================================================================
+
+
+// ---------------------------------------------------------------------------
+// CORE MEASURES (Page 1 — Executive Overview)
+// ---------------------------------------------------------------------------
+
+Revenue =
+SUM ( fact_orders[revenue] )
+
+Orders =
+COUNTROWS ( fact_orders )
+
+Valid Orders =
+CALCULATE ( [Orders], fact_orders[is_zero_amount] = 0 )
+
+AOV =
+DIVIDE ( [Revenue], [Valid Orders] )
+
+Customers =
+DISTINCTCOUNT ( fact_orders[user_id] )
+
+Repeat Customers =
+COUNTROWS (
+    FILTER (
+        VALUES ( fact_orders[user_id] ),
+        CALCULATE ( COUNTROWS ( fact_orders ) ) > 1
+    )
+)
+
+Repeat Rate % =
+DIVIDE ( [Repeat Customers], [Customers] )
+
+
+// ---------------------------------------------------------------------------
+// TIME-INTELLIGENCE / GROWTH MEASURES (Page 1 + Page 4)
+// Require a marked date table: dim_date[date], continuous, no gaps.
+// ---------------------------------------------------------------------------
+
+Revenue LM =                                    // LM = last month
+CALCULATE ( [Revenue], DATEADD ( dim_date[date], -1, MONTH ) )
+
+MoM Revenue Growth % =
+DIVIDE ( [Revenue] - [Revenue LM], [Revenue LM] )
+
+Orders LM =
+CALCULATE ( [Orders], DATEADD ( dim_date[date], -1, MONTH ) )
+
+MoM Orders Growth % =
+DIVIDE ( [Orders] - [Orders LM], [Orders LM] )
+
+AOV LM =
+CALCULATE ( [AOV], DATEADD ( dim_date[date], -1, MONTH ) )
+
+MoM AOV Growth % =
+DIVIDE ( [AOV] - [AOV LM], [AOV LM] )
+
+Running Total Revenue =
+CALCULATE (
+    [Revenue],
+    FILTER ( ALLSELECTED ( dim_date[date] ), dim_date[date] <= MAX ( dim_date[date] ) )
+)
+
+
+// ---------------------------------------------------------------------------
+// CONTRIBUTION MEASURES (Page 1 + Page 3)
+// ---------------------------------------------------------------------------
+
+City Contribution % =
+DIVIDE ( [Revenue], CALCULATE ( [Revenue], ALL ( dim_restaurants[city] ) ) )
+
+Restaurant Contribution % =
+DIVIDE ( [Revenue], CALCULATE ( [Revenue], ALL ( dim_restaurants[r_id], dim_restaurants[name] ) ) )
+
+Segment Revenue =
+[Revenue]        // just SUM(revenue) filtered by customer_rfm[segment] via the relationship
+
+Segment Contribution % =
+DIVIDE ( [Revenue], CALCULATE ( [Revenue], ALL ( customer_rfm[segment] ) ) )
+
+
+// ---------------------------------------------------------------------------
+// CUSTOMER / RFM MEASURES (Page 2 — Customer Intelligence)
+// ---------------------------------------------------------------------------
+
+Avg Recency (days) =
+AVERAGE ( customer_rfm[recency_days] )
+
+Avg Frequency =
+AVERAGE ( customer_rfm[frequency] )
+
+Avg Monetary =
+AVERAGE ( customer_rfm[monetary] )
+
+Champions Revenue % =
+DIVIDE (
+    CALCULATE ( [Revenue], customer_rfm[segment] = "Champions" ),
+    [Revenue]
+)
+
+// Ranking helpers (Page 3 — restaurant/city leaderboards) --------------------
+
+Restaurant Revenue Rank =
+RANKX ( ALLSELECTED ( dim_restaurants[r_id] ), [Revenue], , DESC, DENSE )
+
+City Revenue Rank =
+RANKX ( ALLSELECTED ( dim_restaurants[city] ), [Revenue], , DESC, DENSE )
+
+
+// ---------------------------------------------------------------------------
+// RATING ANALYSIS (Page 3)
+// ---------------------------------------------------------------------------
+
+Avg Rating (Rated Only) =
+CALCULATE ( AVERAGE ( dim_restaurants[rating_numeric] ), dim_restaurants[has_rating] = TRUE () )
+
+Rated Restaurants % =
+DIVIDE (
+    CALCULATE ( DISTINCTCOUNT ( dim_restaurants[r_id] ), dim_restaurants[has_rating] = TRUE () ),
+    DISTINCTCOUNT ( dim_restaurants[r_id] )
+)
